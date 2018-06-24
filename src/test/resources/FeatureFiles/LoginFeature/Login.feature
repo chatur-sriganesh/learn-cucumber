@@ -23,15 +23,14 @@ Feature: Title of your feature
   @signin
   Scenario: Title of your scenario
     Given I  open the "chrome" browser
-    And I click "Sign In" button on "login" screen
+    And I open application
+    # And I open application "http://www.google.com"
+    And I click "signin" button on "Homepage" screen
+    And I enter "admin" value in "username" field on "Login" screen
+    And I enter "admin" value in "password" field on "Login" screen
+    And I click "loginbutton" button on "Login" screen
     
-
-  #@tag2
-  #Scenario Outline: Title of your scenario outline
-  #  Given I want to write a step with <name>
-  #  When I check for the <value> in step
-  #  Then I verify the <status> in step
-
+    
    # Examples: 
     #  | name  | value | status  |
     #  | name1 |     5 | success |
