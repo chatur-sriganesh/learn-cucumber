@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import org.openqa.selenium.WebDriver;
-
 public class ReadObjects {
 	static ArrayList<String> LIST_OF_SCREENS = new ArrayList<String>();
 	HashMap<String, String> LOCATIOR_MAPPING = new HashMap<>();
 
-	public static String readLocatorPropertyFile(String element, String screenName, WebDriver driver) {
+	public static void readLocatorPropertyFile() {
 		File folder = new File("src/test/resources/Screens");
 
 		File[] files = folder.listFiles();
@@ -20,6 +18,10 @@ public class ReadObjects {
 			LIST_OF_SCREENS.add(file.getPath());
 		}
 		System.out.println("All Screen file names: " + LIST_OF_SCREENS);
+
+	}
+
+	public static String getLocatorValueFromProperties(String element, String screenName) {
 		for (String screen : LIST_OF_SCREENS) {
 			if (screen.contains(screenName)) {
 				ResourceBundle bundle = ResourceBundle.getBundle("Screens/" + screenName);
@@ -27,8 +29,7 @@ public class ReadObjects {
 
 			}
 		}
-		return screenName;
-
+		return null;
 	}
 
 	// public static void loadAllScreenNames() {
