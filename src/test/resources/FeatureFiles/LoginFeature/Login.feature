@@ -21,17 +21,16 @@ Feature: Title of your feature
   I want to use this template for my feature file
 
   @signin
-  Scenario: Title of your scenario
+  Scenario Outline: Title of your scenario
     Given I  open the "chrome" browser
     And I open application
     # And I open application "http://www.google.com"
     And I click "signin" button on "Homepage" screen
-    And I enter "admin" value in "username" field on "Login" screen
-    And I enter "admin" value in "password" field on "Login" screen
+    And I enter "<username>" value in "username" field on "Login" screen
+    And I enter "<password>" value in "password" field on "Login" screen
     And I click "loginbutton" button on "Login" screen
-    
-    
-   # Examples: 
-    #  | name  | value | status  |
-    #  | name1 |     5 | success |
-     # | name2 |     7 | Fail    |
+    Then I verify "welcomelabel" on "Adminpage" is "<WelcomeMessage>"
+   	Examples: 
+      | username  | password | WelcomeMessage					 |
+      | admin 		| admin 	 | Hello Admin User				 |
+      | jsmith		| Demo1234 | Hello John Smith  	  	 |

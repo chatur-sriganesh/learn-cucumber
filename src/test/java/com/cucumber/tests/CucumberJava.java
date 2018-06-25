@@ -1,5 +1,6 @@
 package com.cucumber.tests;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 
 public class CucumberJava {
 	WebDriver driver = null;
@@ -33,12 +35,12 @@ public class CucumberJava {
 		switch (browser) {
 
 		case "firefox": {
-			System.setProperty("webdriver.gecko.driver", "C:\\chatur\\BrowserDrivers\\geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", "C:\\<username>\\BrowserDrivers\\geckodriver.exe");
 			this.driver = new FirefoxDriver();
 			break;
 		}
 		case "chrome": {
-			System.setProperty("webdriver.chrome.driver", "C:\\chatur\\BrowserDrivers\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\<username>\\BrowserDrivers\\chromedriver.exe");
 			this.driver = new ChromeDriver();
 			break;
 		}
@@ -90,6 +92,14 @@ public class CucumberJava {
 		String crudeLocator = ReadObjects.getLocatorValueFromProperties(fieldElement, screenName);
 		WebElement field = this.returnWebElement(crudeLocator);
 		field.sendKeys(textValue);
+	}
+
+	@Then("^I verify \"([^\"]*)\" on \"([^\"]*)\" is \"([^\"]*)\"$")
+	public void i_verify_expected_with_actual(String element, String screenName, String expectedValue) {
+
+		String crudeLocator = ReadObjects.getLocatorValueFromProperties(element, screenName);
+		WebElement actualElement = this.returnWebElement(crudeLocator);
+		Assert.assertEquals(expectedValue, actualElement.getText().toString());
 	}
 
 }
